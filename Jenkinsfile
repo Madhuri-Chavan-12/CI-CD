@@ -1,29 +1,41 @@
 pipeline {
     agent any
-
     stages {
-
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                git branch: 'main',
-                url: 'https://github.com/Madhuri-Chavan-12/CI-CD.git'
+                // Checkout your source code from version control
+                git 'https://github.com/Madhuri-Chavan-12/CI-CD.git'
             }
         }
-
-        stage('Run Application') {
+        stage('Build') {
             steps {
-                sh 'python3 Calculator.py'
+                // Use Maven to build your project
+                sh 'mvn clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Run tests if applicable
+                sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // Deploy your artifact, if necessary
+                // Example: sh 'mvn deploy'
             }
         }
     }
+    
 
     post {
         success {
-            echo 'Pipeline Success'
+            // This block will be executed if the pipeline runs successfully
+            echo 'Pipeline executed successfully!'
         }
-
         failure {
-            echo 'Pipeline Failed'
+            // This block will be executed if the pipeline fails
+            echo 'Pipeline failed!'
         }
     }
 }
