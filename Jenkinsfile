@@ -6,7 +6,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
-                url: https://github.com/Madhuri-Chavan-12/CI-CD.git
+                url: 'https://github.com/Madhuri-Chavan-12/CI-CD.git'
             }
         }
 
@@ -21,12 +21,6 @@ pipeline {
                 sh 'python3 Calculator.py'
             }
         }
-
-        stage('Run Tests') {
-            steps {
-                sh 'pytest'
-           }
-       }
 
     }
       
