@@ -10,20 +10,13 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                sh 'pip install -r requirements.txt'
-            }
-        }
-
         stage('Run Application') {
             steps {
                 sh 'python3 Calculator.py'
             }
         }
-
     }
-      
+
     post {
         success {
             echo 'Pipeline Success'
@@ -32,5 +25,5 @@ pipeline {
         failure {
             echo 'Pipeline Failed'
         }
-    }  
+    }
 }
