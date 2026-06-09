@@ -1,24 +1,23 @@
 pipeline {
     agent any
-
     stages {
 
-        stage('Checkout Code') {
+        stage('Checkout code'){
             steps {
                 git branch: 'main',
-                url: 'https://github.com/Madhuri-Chavan-12/CI-CD.git'
+                url: 'https://github.com/Madhuri-Chavan-12/CI-Cd.git'
             }
         }
 
-        stage('Run Application') {
+        stage('Run Application'){
             steps {
-                sh 'python3 Calculator.py'
+                sh 'python3 app.py'
             }
         }
     }
 
     post {
-        success {
+        success{
             echo 'Pipeline Success'
         }
 
