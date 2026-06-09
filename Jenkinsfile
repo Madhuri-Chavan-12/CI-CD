@@ -2,17 +2,15 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Checkout Code') {
+        stage('Build') {
             steps {
-                git branch: 'main',
-                url: 'https://github.com/Madhuri-Chavan-12/CI-CD.git'
+                echo 'Building...'
             }
         }
 
-        stage('Run Application') {
+        stage('Test') {
             steps {
-                sh 'python3 Calculator.py'
+                sh 'exit 1'
             }
         }
     }
