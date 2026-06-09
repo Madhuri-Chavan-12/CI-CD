@@ -4,6 +4,14 @@ pipeline {
     stages {
         stage('Test') {
             steps {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
+
+        stage('Test') {
+            steps {
                 sh 'exit 1'
             }
         }
@@ -12,9 +20,17 @@ pipeline {
     post {
         failure {
             emailext(
-                to: 'madhurichavan612@gmail.com',
-                subject: 'Build Failed',
-                body: 'Build Failed'
+                subject: "Build Failed: ${env.JOB_NAME}",
+                body: """
+                Build Failed
+
+                Job: ${env.JOB_NAME}
+                Build Number: ${env.BUILD_NUMBER}
+
+                URL:
+                ${env.BUILD_URL}
+                """,
+                to: 'madhurichavan612@gmail.com'
             )
         }
     }
