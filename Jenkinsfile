@@ -12,18 +12,26 @@ pipeline {
 
         stage('Run Application') {
             steps {
-                sh 'python3 app.py'
+                sh 'python3 Calculator.py'
             }
         }
     }
 
     post {
-        success {
-            echo 'Pipeline Success'
-        }
-
         failure {
-            echo 'Pipeline Failed'
+            emailext(
+                subject: "Build Failed: ${env.JOB_NAME}",
+                body: """
+                Build Failed
+
+                Job: ${env.JOB_NAME}
+                Build Number: ${env.BUILD_NUMBER}
+
+                URL:
+                ${env.BUILD_URL}
+                """,
+                to: 'madhurichavan612@gmail.com'
+            )
         }
     }
 }
